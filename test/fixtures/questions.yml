@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  question: MyString
+  topic: MyString
+  correct_answer: MyString
+  incorrect_answer_1: MyString
+  incorrect_answer_2: MyString
+  incorrect_answer_3: MyString
+  user_id: 1
+  chapter_id: 1
+
+two:
+  question: MyString
+  topic: MyString
+  correct_answer: MyString
+  incorrect_answer_1: MyString
+  incorrect_answer_2: MyString
+  incorrect_answer_3: MyString
+  user_id: 1
+  chapter_id: 1
