@@ -1,4 +1,8 @@
 = javascript_include_tag "question"
+
+= "Welcome " + current_user.name + "!"
+=link_to "Sign out", signout_path 
+
 %center
     %h2= "#{@book.name} / #{@chapter.name} (#{@chapter.number})"
     = link_to('Edit', edit_chapter_path(@chapter))

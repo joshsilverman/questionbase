@@ -5,6 +5,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'haml'
 gem 'sass'
 gem 'coffee-script'
+gem 'omniauth'
 
 # Bundle the extra gems:
 # gem 'bj'

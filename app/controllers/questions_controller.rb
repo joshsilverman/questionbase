@@ -92,15 +92,6 @@ class QuestionsController < ApplicationController
     @question.topic = params[:topic] if @question.topic.nil?
     @question.chapter_id = params[:chapter_id] if @question.chapter_id.nil?
     @question.save
-    # @question = Question.create!(
-    #   :question => params[:question], 
-    #   :correct_answer => params[:correct_answer],
-    #   :incorrect_answer_1 => params[:incorrect_answer_1], 
-    #   :incorrect_answer_2 => params[:incorrect_answer_2], 
-    #   :incorrect_answer_3 => params[:incorrect_answer_3], 
-    #   :topic => params[:topic],
-    #   :chapter_id => params[:chapter_id]
-    # )
     render :nothing => true
   end
 
