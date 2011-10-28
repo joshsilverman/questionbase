@@ -4,6 +4,7 @@ gem 'rails', '3.0.3'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'haml'
 gem 'sass'
+gem 'coffee-script'
 
 # Bundle the extra gems:
 # gem 'bj'

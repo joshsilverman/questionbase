@@ -25,11 +25,12 @@ class QuestionsController < ApplicationController
   # GET /questions/new.xml
   def new
     @question = Question.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @question }
-    end
+    @question.save
+    render :json => {:question_id => @question.id}.to_json
+    # respond_to do |format|
+    #   format.html # new.html.erb
+    #   format.xml  { render :xml => @question }
+    # end
   end
 
   # GET /questions/1/edit
@@ -80,4 +81,27 @@ class QuestionsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def save_question
+    @question = Question.find_or_initialize_by_id(params[:question_id])
+    @question.question = params[:question] if @question.question.nil?
+    @question.correct_answer = params[:correct_answer] if @question.correct_answer.nil?
+    @question.incorrect_answer_1 = params[:incorrect_answer_1] if @question.incorrect_answer_1.nil?
+    @question.incorrect_answer_2 = params[:incorrect_answer_2] if @question.incorrect_answer_2.nil?
+    @question.incorrect_answer_3 = params[:incorrect_answer_3] if @question.incorrect_answer_3.nil?
+    @question.topic = params[:topic] if @question.topic.nil?
+    @question.chapter_id = params[:chapter_id] if @question.chapter_id.nil?
+    @question.save
+    # @question = Question.create!(
+    #   :question => params[:question], 
+    #   :correct_answer => params[:correct_answer],
+    #   :incorrect_answer_1 => params[:incorrect_answer_1], 
+    #   :incorrect_answer_2 => params[:incorrect_answer_2], 
+    #   :incorrect_answer_3 => params[:incorrect_answer_3], 
+    #   :topic => params[:topic],
+    #   :chapter_id => params[:chapter_id]
+    # )
+    render :nothing => true
+  end
+
 end

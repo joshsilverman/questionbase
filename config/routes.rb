@@ -3,6 +3,8 @@ Questionbase::Application.routes.draw do
   resources :chapters
   resources :questions
 
+  match "questions/save_question" => "questions#save_question"
+
   root :to => "books#index"
 
   # The priority is based upon order of creation:

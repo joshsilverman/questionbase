@@ -1,27 +1,39 @@
+= javascript_include_tag "question"
+%center
+    %h2= "#{@book.name} / #{@chapter.name} (#{@chapter.number})"
+    = link_to('Edit', edit_chapter_path(@chapter))
+%br
+%hr
+%table{:id => "questions"}
+    %tbody
+        - @questions.each do |question|
+            %tr{:id => "question_" + question.id.to_s}
+                - form_for question, :remote => true do |f|
+                    %br
+                    = f.label "Question"
+                    = f.text_field :question, :value => question.question
+                    %br
+                    = f.label "Correct answer"
+                    = f.text_field :correct_answer, :value => question.correct_answer
+                    %br
+                    = f.label "Incorrect answer #1"
+                    = f.text_field :incorrect_answer_1, :value => question.incorrect_answer_1
+                    %br
+                    = f.label "Incorrect answer #2"
+                    = f.text_field :incorrect_answer_2, :value => question.incorrect_answer_2
+                    %br
+                    = f.label "Incorrect answer #3"
+                    = f.text_field :incorrect_answer_3, :value => question.incorrect_answer_3
+                    %br  
+                    = f.label "Topic"
+                    = f.text_field :topic, :value => question.topic
+                    %br  
+                    %br
+                    = f.submit "Save"
+                    %br
+                    %br
+                    %hr                      
 
 
-- @questions.each do |question|
-    - form_for question do |f|
-        = f.label "Question"
-        = f.text_field :question, :value => question.question
-        %br
-        = f.label "Correct answer"
-        = f.text_field :correct_answer, :value => question.correct_answer
-        %br
-        = f.label "Incorrect answer #1"
-        = f.text_field :incorrect_answer_1, :value => question.incorrect_answer_1
-        %br
-        = f.label "Incorrect answer #2"
-        = f.text_field :incorrect_answer_2, :value => question.incorrect_answer_2
-        %br
-        = f.label "Incorrect answer #3"
-        = f.text_field :incorrect_answer_3, :value => question.incorrect_answer_3
-        %br  
-        = f.label "Topic"
-        = f.text_field :topic, :value => question.topic
-        %br  
-        %hr                      
-
-%p= link_to('Add new question', new_question_path({:chapter_id => @chapter.number}))
-%p= link_to('Edit', edit_chapter_path(@chapter))
+%p= link_to_function('Add question', "addQuestionRow(#{@chapter.id})" )
 %p= link_to('Back', chapters_path)
