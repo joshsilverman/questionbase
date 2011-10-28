@@ -1,9 +1,9 @@
 %h1= "All books:"
+%br
 
 - @books.each do |book|
-  %tr
-    %td= link_to(book.name + " by " + book.author + "(" + book.edition + "e)", book)
-    %td= link_to('Edit', edit_book_path(book))
+  %ul
+    %li= link_to(book.name + " by " + book.author + "(" + book.edition + "e)", book) + " - " + link_to('Edit', edit_book_path(book))
     %br
     // %td= link_to('Delete', book, :confirm => 'Are you sure?', :method => :delete)
 

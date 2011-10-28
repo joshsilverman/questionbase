@@ -14,7 +14,8 @@ class BooksController < ApplicationController
   # GET /books/1.xml
   def show
     @book = Book.find(params[:id])
-    @chapters = @book.chapters
+    @chapters = @book.chapters.sort!{|a, b| a.number <=> b.number}
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @book }

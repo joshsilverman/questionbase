@@ -14,6 +14,7 @@ class ChaptersController < ApplicationController
   # GET /chapters/1.xml
   def show
     @chapter = Chapter.find(params[:id])
+    @questions = @chapter.questions
 
     respond_to do |format|
       format.html # show.html.erb

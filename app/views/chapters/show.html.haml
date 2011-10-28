@@ -1,0 +1,7 @@
+- @questions.each do |question|
+    %tr
+        %td= link_to(question.name)
+        %br
+
+%p= link_to 'Edit', edit_chapter_path(@chapter)
+%p= link_to 'Back', chapters_path
