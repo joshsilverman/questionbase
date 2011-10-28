@@ -1,5 +1,10 @@
 %h1= "All chapters:"
 
-%p= link_to('Add new chapter', new_book_path)
+- @chapters.each do |chapter|
+    %tr
+        %td= chapter.name
+        %br
+
+%p= link_to('Add new chapter', new_chapter_path({:book_id => @book.id}))
 
 %p= link_to('Back', books_path)

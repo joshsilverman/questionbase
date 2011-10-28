@@ -24,6 +24,7 @@ class ChaptersController < ApplicationController
   # GET /chapters/new
   # GET /chapters/new.xml
   def new
+    @current_book = Book.find_by_id(params[:book_id])
     @chapter = Chapter.new
 
     respond_to do |format|
@@ -41,6 +42,7 @@ class ChaptersController < ApplicationController
   # POST /chapters.xml
   def create
     @chapter = Chapter.new(params[:chapter])
+    @chapter.book_id = params[:book_id]
 
     respond_to do |format|
       if @chapter.save
