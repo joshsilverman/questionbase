@@ -91,6 +91,7 @@ class QuestionsController < ApplicationController
     @question.incorrect_answer_3 = params[:incorrect_answer_3] if @question.incorrect_answer_3.nil?
     @question.topic = params[:topic] if @question.topic.nil?
     @question.chapter_id = params[:chapter_id] if @question.chapter_id.nil?
+    @question.user_id = current_user.id if @question.user_id.nil?
     @question.save
     render :nothing => true
   end

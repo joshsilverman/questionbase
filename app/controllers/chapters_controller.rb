@@ -13,7 +13,9 @@ class ChaptersController < ApplicationController
   # GET /chapters/1
   # GET /chapters/1.xml
   def show
+    puts params.to_json
     @chapter = Chapter.find(params[:id])
+    puts @chapter.to_json
     @book = Book.find_by_id(@chapter.book_id)
     @questions = @chapter.questions
 
