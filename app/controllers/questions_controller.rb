@@ -95,5 +95,10 @@ class QuestionsController < ApplicationController
     @question.save
     render :nothing => true
   end
+  
+  def random_match_up
+    @question1 = Question.get_random_question
+    @question2 = @question1.get_related_question
+  end
 
 end
