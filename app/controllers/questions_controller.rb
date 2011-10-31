@@ -83,9 +83,7 @@ class QuestionsController < ApplicationController
   end
 
   def save_question
-    puts params.to_json
     @question = Question.find_or_initialize_by_id(params[:question_id])
-    puts @question.to_json
     @question.question = params[:question]
     @question.correct_answer = params[:correct_answer]
     @question.incorrect_answer_1 = params[:incorrect_answer_1]

@@ -10,4 +10,4 @@
         %li= link_to(chapter.name + " (ch " + chapter.number.to_s + ")", chapter, :chapter_number => chapter.number) + " - " + link_to('Edit', edit_chapter_path(chapter.id))
 %br
 %p= link_to('Add new chapter', new_chapter_path({:book_id => @book.id}))
-%p= link_to('Back', books_path)
+%p= link_to('Back to Books', books_path)
