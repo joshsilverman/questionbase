@@ -61,7 +61,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.update_attributes(params[:book])
-        format.html { redirect_to(@book, :notice => 'Book was successfully updated.') }
+        format.html { redirect_to('/books') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
