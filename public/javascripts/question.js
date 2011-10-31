@@ -1,3 +1,23 @@
+var saveQuestion = function(id, chapter_id) {
+    // console.log($('correct_answer_' + id));
+    params = {"question_id" : id,
+        "question" : $('question_' + id).value,
+        "correct_answer" : $('correct_answer_' + id).value,
+        "incorrect_answer_1" : $('incorrect_answer_1_' + id).value,
+        "incorrect_answer_2" : $('incorrect_answer_2_' + id).value,
+        "incorrect_answer_3" : $('incorrect_answer_3_' + id).value,
+        "topic" : $('topic_' + id).value,
+        "chapter_id" : chapter_id
+    };
+    new Ajax.Request("/questions/save_question", {
+        method: "post",
+        parameters: params,
+        onFailure: function() {
+           alert("Failed to save question.");
+        },
+    });   
+}
+
 var addQuestionRow = function(chapter_id) {
     new Ajax.Request("/questions/new", {
         method: "get",
@@ -141,9 +161,6 @@ var createNewQuestion = function(question) {
         onFailure: function() {
            alert("Failed to save question.");
         },
-        onSuccess: function() {
-            
-        }
     });
 }
 

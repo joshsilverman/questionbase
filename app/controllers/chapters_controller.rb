@@ -38,7 +38,7 @@ class ChaptersController < ApplicationController
   # GET /chapters/1/edit
   def edit
     @chapter = Chapter.find(params[:id])
-    @current_book = Book.find_by_id(@chapter.id)
+    @current_book = Book.find_by_id(@chapter.book_id)
   end
 
   # POST /chapters
