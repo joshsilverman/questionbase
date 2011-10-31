@@ -67,7 +67,8 @@ var addQuestionRow = function(chapter_id) {
             var questionElement = document.createElement("textarea");
             newRow.appendChild(questionElement);
             questionElement.observe("keypress", function() { submitElement.value = "Save"; });
-            
+            questionElement.focus();
+
             // Correct answer
             var newRow = table.insertRow(table.rows.length);
 
@@ -171,6 +172,8 @@ var addQuestionRow = function(chapter_id) {
             var hrElement = document.createElement("hr");
             hrElement.width = "auto";
             newRow.appendChild(hrElement);  
+
+            window.scrollTo(0, document.body.scrollHeight);
         }
     });    
 }
