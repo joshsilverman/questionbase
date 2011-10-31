@@ -1,13 +1,14 @@
-= "Welcome " + current_user.name + "!"
-=link_to "Sign out", signout_path 
+.login
+    = "Welcome " + current_user.name + "!"
+    =link_to "Sign out", signout_path 
 
 %h1= "All books:"
 %br
 
 - @books.each do |book|
-  %ul
-    %li= link_to(book.name + " by " + book.author + " (" + book.edition + "e)", book) + " - " + link_to('Edit', edit_book_path(book))
-    %br
+    %ul
+        %li= link_to(book.name + " by " + book.author + " (" + book.edition + "e)", book) + " - " + link_to('Edit', edit_book_path(book))
+        %br
     // %td= link_to('Delete', book, :confirm => 'Are you sure?', :method => :delete)
 
 %p= link_to('Add new book', new_book_path)

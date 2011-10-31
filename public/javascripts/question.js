@@ -1,3 +1,44 @@
+document.observe('dom:loaded', function() {
+    intializeListeners();
+});
+
+var intializeListeners = function(){
+    // $$(".submit").each(function(button){
+    //     save.observe('click', function() {
+    //         console.log('yo');
+
+    //         // $("div_" + save.id).style.backgroundColor = "#BFFFC0";
+    //     });
+    // }); 
+    $$(".field").each(function(field){
+        field.observe('keypress', function() {
+            $('submit_' + field.getAttribute('question_id')).value = "Save";
+        });
+    });
+}
+
+var saveQuestion = function(id, chapter_id) {
+    params = {"question_id" : id,
+        "question" : $('question_' + id).value,
+        "correct_answer" : $('correct_answer_' + id).value,
+        "incorrect_answer_1" : $('incorrect_answer_1_' + id).value,
+        "incorrect_answer_2" : $('incorrect_answer_2_' + id).value,
+        "incorrect_answer_3" : $('incorrect_answer_3_' + id).value,
+        "topic" : $('topic_' + id).value,
+        "chapter_id" : chapter_id
+    };
+    new Ajax.Request("/questions/save_question", {
+        method: "post",
+        parameters: params,
+        onFailure: function() {
+           alert("Failed to save question.");
+        },
+        onSuccess: function() {
+            $('submit_' + id).value = "Saved";
+        }
+    });   
+}
+
 var addQuestionRow = function(chapter_id) {
     new Ajax.Request("/questions/new", {
         method: "get",
@@ -23,12 +64,11 @@ var addQuestionRow = function(chapter_id) {
             element.appendChild(text);
             newRow.appendChild(element);
 
-            var questionElement = document.createElement("input");
-            questionElement.type = "text";
-            questionElement.size = 30;            
+            var questionElement = document.createElement("textarea");
             newRow.appendChild(questionElement);
             questionElement.observe("keypress", function() { submitElement.value = "Save"; });
-            
+            questionElement.focus();
+
             // Correct answer
             var newRow = table.insertRow(table.rows.length);
 
@@ -38,8 +78,7 @@ var addQuestionRow = function(chapter_id) {
             newRow.appendChild(element);
 
             var correctElement = document.createElement("input");
-            correctElement.type = "text";
-            correctElement.size = 30;
+            correctElement.className = "field";
             newRow.appendChild(correctElement);
             correctElement.observe("keypress", function() { submitElement.value = "Save"; });
 
@@ -52,8 +91,7 @@ var addQuestionRow = function(chapter_id) {
             newRow.appendChild(element);
 
             var incorrectElement1 = document.createElement("input");
-            incorrectElement1.type = "text";
-            incorrectElement1.size = 30;
+            incorrectElement1.className = "field";
             newRow.appendChild(incorrectElement1);
             incorrectElement1.observe("keypress", function() { submitElement.value = "Save"; });
 
@@ -66,8 +104,7 @@ var addQuestionRow = function(chapter_id) {
             newRow.appendChild(element);
 
             var incorrectElement2 = document.createElement("input");
-            incorrectElement2.type = "text";
-            incorrectElement2.size = 30;
+            incorrectElement2.className = "field";
             newRow.appendChild(incorrectElement2);
             incorrectElement2.observe("keypress", function() { submitElement.value = "Save"; });
 
@@ -80,8 +117,7 @@ var addQuestionRow = function(chapter_id) {
             newRow.appendChild(element);
 
             var incorrectElement3 = document.createElement("input");
-            incorrectElement3.type = "text";
-            incorrectElement3.size = 30;
+            incorrectElement3.className = "field";
             newRow.appendChild(incorrectElement3);   
             incorrectElement3.observe("keypress", function() { submitElement.value = "Save"; });
             
@@ -94,8 +130,7 @@ var addQuestionRow = function(chapter_id) {
             newRow.appendChild(element);
 
             var topicElement = document.createElement("input");
-            topicElement.type = "text";
-            topicElement.size = 30;
+            topicElement.className = "field";
             newRow.appendChild(topicElement);                      
             topicElement.observe("keypress", function() { submitElement.value = "Save"; });
             
@@ -137,6 +172,8 @@ var addQuestionRow = function(chapter_id) {
             var hrElement = document.createElement("hr");
             hrElement.width = "auto";
             newRow.appendChild(hrElement);  
+
+            window.scrollTo(0, document.body.scrollHeight);
         }
     });    
 }
@@ -148,9 +185,6 @@ var createNewQuestion = function(question) {
         onFailure: function() {
            alert("Failed to save question.");
         },
-        onSuccess: function() {
-            
-        }
     });
 }
 

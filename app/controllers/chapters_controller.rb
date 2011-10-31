@@ -13,9 +13,7 @@ class ChaptersController < ApplicationController
   # GET /chapters/1
   # GET /chapters/1.xml
   def show
-    puts params.to_json
     @chapter = Chapter.find(params[:id])
-    puts @chapter.to_json
     @book = Book.find_by_id(@chapter.book_id)
     @questions = @chapter.questions
 
@@ -40,6 +38,7 @@ class ChaptersController < ApplicationController
   # GET /chapters/1/edit
   def edit
     @chapter = Chapter.find(params[:id])
+    @current_book = Book.find_by_id(@chapter.book_id)
   end
 
   # POST /chapters
@@ -63,16 +62,19 @@ class ChaptersController < ApplicationController
   # PUT /chapters/1.xml
   def update
     @chapter = Chapter.find(params[:id])
-
+    book = Book.find_by_id(@chapter.book_id)
+    puts book.to_json
     respond_to do |format|
       if @chapter.update_attributes(params[:chapter])
-        format.html { redirect_to(@chapter, :notice => 'Chapter was successfully updated.') }
+        format.html { redirect_to "/books/#{book.id}" }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @chapter.errors, :status => :unprocessable_entity }
       end
     end
+
+    
   end
 
   # DELETE /chapters/1

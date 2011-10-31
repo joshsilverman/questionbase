@@ -1,0 +1,18 @@
+label {
+    display: block;
+}
+
+textarea {
+    height: 60px;
+    width: 400px;
+    font-size: large;
+}
+
+.field {
+    width: 400px;  
+}
+
+hr {
+    width: 100%;
+}
+

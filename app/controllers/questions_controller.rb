@@ -84,14 +84,14 @@ class QuestionsController < ApplicationController
 
   def save_question
     @question = Question.find_or_initialize_by_id(params[:question_id])
-    @question.question = params[:question] if @question.question.nil?
-    @question.correct_answer = params[:correct_answer] if @question.correct_answer.nil?
-    @question.incorrect_answer_1 = params[:incorrect_answer_1] if @question.incorrect_answer_1.nil?
-    @question.incorrect_answer_2 = params[:incorrect_answer_2] if @question.incorrect_answer_2.nil?
-    @question.incorrect_answer_3 = params[:incorrect_answer_3] if @question.incorrect_answer_3.nil?
-    @question.topic = params[:topic] if @question.topic.nil?
-    @question.chapter_id = params[:chapter_id] if @question.chapter_id.nil?
-    @question.user_id = current_user.id if @question.user_id.nil?
+    @question.question = params[:question]
+    @question.correct_answer = params[:correct_answer]
+    @question.incorrect_answer_1 = params[:incorrect_answer_1]
+    @question.incorrect_answer_2 = params[:incorrect_answer_2]
+    @question.incorrect_answer_3 = params[:incorrect_answer_3]
+    @question.topic = params[:topic]
+    @question.chapter_id = params[:chapter_id]
+    @question.user_id = current_user.id
     @question.save
     render :nothing => true
   end

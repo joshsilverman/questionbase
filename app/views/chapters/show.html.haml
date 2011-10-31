@@ -1,43 +1,47 @@
 = javascript_include_tag "question"
+= stylesheet_link_tag "question"
 
-= "Welcome " + current_user.name + "!"
-=link_to "Sign out", signout_path 
+= link_to('Back to Chapters', '/books/' + @book.id.to_s)
+
+.login
+     = "Welcome " + current_user.name + "!"
+     =link_to "Sign out", signout_path 
 
 %center
      %h2= "#{@book.name} / #{@chapter.name} (#{@chapter.number})"
-     / # = link_to('Edit', edit_chapter_path(@chapter))
+
 %br
 %hr
 %table{:id => "questions"}
      %tbody
           - @questions.each do |question|
                %tr{:id => "question_" + question.id.to_s}
-                    - form_for question, :remote => true do |f|
+                    - form_for question, :url => :save_question_path, :remote => true do |f|
                          %br
                          = f.label "Question"
-                         = f.text_field :question, :value => question.question                                   
+                         = f.text_area :question, :value => question.question, :id => "question_" + question.id.to_s, :class => "field", :question_id => question.id.to_s                          
                          %br
                          = f.label "Correct answer"
-                         = f.text_field :correct_answer, :value => question.correct_answer
+                         = f.text_field :correct_answer, :value => question.correct_answer, :class => "field", :id => "correct_answer_" + question.id.to_s, :question_id => question.id.to_s  
                          %br
                          = f.label "Incorrect answer #1"
-                         = f.text_field :incorrect_answer_1, :value => question.incorrect_answer_1
+                         = f.text_field :incorrect_answer_1, :value => question.incorrect_answer_1, :class => "field", :id => "incorrect_answer_1_" + question.id.to_s, :question_id => question.id.to_s  
                          %br
                          = f.label "Incorrect answer #2"
-                         = f.text_field :incorrect_answer_2, :value => question.incorrect_answer_2
+                         = f.text_field :incorrect_answer_2, :value => question.incorrect_answer_2, :id => "incorrect_answer_2_" + question.id.to_s, :class => "field", :question_id => question.id.to_s  
                          %br
                          = f.label "Incorrect answer #3"
-                         = f.text_field :incorrect_answer_3, :value => question.incorrect_answer_3
+                         = f.text_field :incorrect_answer_3, :value => question.incorrect_answer_3, :id => "incorrect_answer_3_" + question.id.to_s, :class => "field", :question_id => question.id.to_s  
                          %br  
                          = f.label "Topic"
-                         = f.text_field :topic, :value => question.topic
+                         = f.text_field :topic, :value => question.topic, :id => "topic_" + question.id.to_s, :class => "field", :question_id => question.id.to_s  
                          %br  
                          %br
-                         = f.submit "Save"
+                         / # = f.submit "Save"
+                         = button_to_function("Saved", "saveQuestion(#{question.id}, #{@chapter.id})", :id => "submit_" + question.id.to_s, :class => "submit")
                          %br
                          %br
-                         %hr                      
-
-
+                         %hr   
+                  
 %p= link_to_function('Add question', "addQuestionRow(#{@chapter.id})" )
-%p= link_to('Back', :back)
+%p= link_to('Back to Chapters', '/books/' + @book.id.to_s)
