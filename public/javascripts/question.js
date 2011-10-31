@@ -1,5 +1,23 @@
+document.observe('dom:loaded', function() {
+    intializeListeners();
+});
+
+var intializeListeners = function(){
+    // $$(".submit").each(function(button){
+    //     save.observe('click', function() {
+    //         console.log('yo');
+
+    //         // $("div_" + save.id).style.backgroundColor = "#BFFFC0";
+    //     });
+    // }); 
+    $$(".field").each(function(field){
+        field.observe('keypress', function() {
+            $('submit_' + field.getAttribute('question_id')).value = "Save";
+        });
+    });
+}
+
 var saveQuestion = function(id, chapter_id) {
-    // console.log($('correct_answer_' + id));
     params = {"question_id" : id,
         "question" : $('question_' + id).value,
         "correct_answer" : $('correct_answer_' + id).value,
@@ -15,6 +33,9 @@ var saveQuestion = function(id, chapter_id) {
         onFailure: function() {
            alert("Failed to save question.");
         },
+        onSuccess: function() {
+            $('submit_' + id).value = "Saved";
+        }
     });   
 }
 
