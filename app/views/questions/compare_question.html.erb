@@ -1,0 +1,19 @@
+<div style="width: 700px; margin:0 auto;">
+  <h1>Which of these two questions is more beneficial to you as a student?</h1>
+  <div id="<%= @question1.id%>" style="width:325px; float:left;">
+    <%= @question1.question %></br>
+    <!--<%= @question1.score %><br />-->
+    <%= link_to "This question is better", "questions/update_question_scores/#{@question1.id}/#{@question2.id}/false" %>
+  </div>
+  
+  <div id="<%= @question2.id%>" style="width:325px; float:right;">
+    <%= @question2.question %></br>
+    <!--<%= @question2.score %><br />-->
+    <%= link_to "This question is better", "questions/update_question_scores/#{@question2.id}/#{@question1.id}/false" %>
+  </div>
+  
+  <div style="clear: both; margin: 15px auto 0 auto; width:100px;">
+    <%= link_to "It's a tie", "questions/update_question_scores/#{@question1.id}/#{@question2.id}/true" %>
+  </div>
+
+</div>

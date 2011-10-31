@@ -96,9 +96,18 @@ class QuestionsController < ApplicationController
     render :nothing => true
   end
   
-  def random_match_up
+  def compare_question
     @question1 = Question.get_random_question
     @question2 = @question1.get_related_question
+  end
+  
+  def update_question_scores
+    winner = Question.find(params[:winner_id])
+    loser = Question.find(params[:winner_id])
+    if winner and loser
+      Question.update_scores(winner, loser, params[:tie])
+    end
+    redirect_to "/compare_question"
   end
 
 end
