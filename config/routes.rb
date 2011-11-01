@@ -10,6 +10,6 @@ Questionbase::Application.routes.draw do
   match "compare_question" => "questions#compare_question"
   match "questions/update_question_scores/:winner_id/:loser_id/:tie" => "questions#update_question_scores"
 
-  # root :to => "static#home"
-  root :to => "books#index"
+  root :to => "static#home"
+  # root :to => "books#index"
 end
