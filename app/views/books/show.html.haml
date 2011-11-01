@@ -2,7 +2,7 @@
     = "Welcome " + current_user.name + "!"
     =link_to "Sign out", signout_path 
 
-%h1= "Book: " + @book.name + " (" + @book.author + ")"
+%h1= @book.name + " (" + @book.author + ")"
 
 %br
 - @chapters.each do |chapter|
