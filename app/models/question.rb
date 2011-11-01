@@ -1,6 +1,6 @@
 class Question < ActiveRecord::Base
-    belongs_to :chapter
-    belongs_to :user
+  belongs_to :chapter
+  belongs_to :user
     
   WINNING_PTS = 1.0
   LOSING_PTS = 0.0
