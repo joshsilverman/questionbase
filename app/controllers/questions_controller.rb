@@ -102,7 +102,7 @@ class QuestionsController < ApplicationController
       @question.incorrect_answer_3 = params[:incorrect_answer_3]
       @question.topic = params[:topic]
       @question.chapter_id = params[:chapter_id]
-      @question.user_id = current_user.id
+      @question.user_id = current_user.id if @question.user_id.nil?
       @question.save
     end
     render :json => @question.id
