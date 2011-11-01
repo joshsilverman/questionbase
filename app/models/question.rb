@@ -44,6 +44,7 @@ class Question < ActiveRecord::Base
   def get_related_question
     score = self.score
     related_questions = Question.where("score < ? and score > ? and id != ?", score+100, score-100, self.id)
+    related_questions = Question.where("id != ?", self.id) if related_questions.empty?
     puts related_questions
     rel_question = related_questions[Random.rand(related_questions.size)]
     return rel_question
