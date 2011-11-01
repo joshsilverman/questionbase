@@ -7,14 +7,21 @@ class Question < ActiveRecord::Base
   DRAW_PTS = 0.5
   K_VALUE = 20
     
-  def self.update_scores(winner, loser, tie=false)
-    winners_win_prob = 1 / (10.0 ** (( loser.score - winner.score)/400.0) + 1)
-    losers_win_prob = 1 / (10.0 **(( winner.score - loser.score)/400.0) + 1)
+  def self.update_scores(winner, loser, tie=0)
+    w_score_diff = loser.score - winner.score
+    l_score_diff = winner.score - loser.score
+    puts "loser score: #{loser.score}"
+    puts "winner score: #{winner.score}"
+    puts "diff: #{w_score_diff}"
+    puts "diff over 400: #{w_score_diff/400.0}"
+    puts "plus one: #{w_score_diff/400.0 + 1}"
+    puts "ten to the power: #{10.00 ** ((w_score_diff/400.0) + 1)}"
+    puts 1 / (10.000 ** (w_score_diff/400.0) + 1)
+    winners_win_prob = 1 / (10.000 ** (( loser.score - winner.score)/400.0) + 1)
+    losers_win_prob = 1 / (10.000 **(( winner.score - loser.score)/400.0) + 1)
     
-    puts winners_win_prob
-    puts losers_win_prob
-    
-    if tie
+    if tie.to_i == 1
+      puts "TIE!"
       winner.update_score(DRAW_PTS, winners_win_prob)
       loser.update_score(DRAW_PTS, losers_win_prob)
     else

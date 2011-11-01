@@ -103,7 +103,7 @@ class QuestionsController < ApplicationController
   
   def update_question_scores
     winner = Question.find(params[:winner_id])
-    loser = Question.find(params[:winner_id])
+    loser = Question.find(params[:loser_id])
     if winner and loser
       Question.update_scores(winner, loser, params[:tie])
     end
