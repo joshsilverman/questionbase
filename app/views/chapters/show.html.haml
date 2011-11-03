@@ -8,7 +8,7 @@
      =link_to "Sign out", signout_path 
 
 %center
-     %h2= "#{@book.name} / #{@chapter.name} (#{@chapter.number})"
+     %h2= "#{@book.name} / Chapter #{@chapter.number}"
 
 %br
 %hr
@@ -18,7 +18,7 @@
                %tr{:id => "question_" + question.id.to_s}
                     - form_for question, :url => :save_question_path, :remote => true do |f|
                          %br
-                         = f.label "Question"
+                         = f.label "Question (" + User.find_by_id(question.user_id).name + " on " + question.created_at.strftime("%d/%m/%y at %H:%M").to_s + ")" 
                          = f.text_area :question, :value => question.question, :id => "question_" + question.id.to_s, :class => "field", :question_id => question.id.to_s                          
                          %br
                          = f.label "Correct answer"
@@ -37,7 +37,6 @@
                          = f.text_field :topic, :value => question.topic, :id => "topic_" + question.id.to_s, :class => "field", :question_id => question.id.to_s  
                          %br  
                          %br
-                         / # = f.submit "Save"
                          = button_to_function("Saved", "saveQuestion(#{question.id}, #{@chapter.id})", :id => "submit_" + question.id.to_s, :class => "submit")
                          %br
                          %br

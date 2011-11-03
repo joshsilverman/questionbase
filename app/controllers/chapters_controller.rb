@@ -18,6 +18,7 @@ class ChaptersController < ApplicationController
     @chapter = Chapter.find(params[:id])
     @book = Book.find_by_id(@chapter.book_id)
     @questions = @chapter.questions
+    @questions.sort!{|a, b| a.created_at <=> b.created_at}
 
     respond_to do |format|
       format.html # show.html.erb

@@ -2,12 +2,12 @@
     = "Welcome " + current_user.name + "!"
     =link_to "Sign out", signout_path 
 
-%h1= "Book: " + @book.name + " (" + @book.author + ")"
+%h1= @book.name + " (" + @book.author + ")"
 
 %br
 - @chapters.each do |chapter|
     %ul
-        %li= link_to(chapter.name + " (ch " + chapter.number.to_s + ")", chapter, :chapter_number => chapter.number) + " - " + link_to('Edit', edit_chapter_path(chapter.id))
+        %li= link_to("Chapter " + chapter.number.to_s, chapter, :chapter_number => chapter.number) + " - " + link_to('Edit', edit_chapter_path(chapter.id))
 %br
 %p= link_to('Add new chapter', new_chapter_path({:book_id => @book.id}))
 %p= link_to('Back to Books', books_path)

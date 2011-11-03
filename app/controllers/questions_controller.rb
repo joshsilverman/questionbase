@@ -25,7 +25,7 @@ class QuestionsController < ApplicationController
   # GET /questions/new.xml
   def new
     @question = Question.new
-    @question.save
+    # @question.save
     render :json => {:question_id => @question.id}.to_json
     # respond_to do |format|
     #   format.html # new.html.erb
@@ -83,17 +83,29 @@ class QuestionsController < ApplicationController
   end
 
   def save_question
-    @question = Question.find_or_initialize_by_id(params[:question_id])
-    @question.question = params[:question]
-    @question.correct_answer = params[:correct_answer]
-    @question.incorrect_answer_1 = params[:incorrect_answer_1]
-    @question.incorrect_answer_2 = params[:incorrect_answer_2]
-    @question.incorrect_answer_3 = params[:incorrect_answer_3]
-    @question.topic = params[:topic]
-    @question.chapter_id = params[:chapter_id]
-    @question.user_id = current_user.id
-    @question.save
-    render :nothing => true
+    if params[:question_id].nil?
+      @question = Question.create!(:question => params[:question],
+        :correct_answer => params[:correct_answer],
+        :incorrect_answer_1 => params[:incorrect_answer_1],
+        :incorrect_answer_2 => params[:incorrect_answer_2],
+        :incorrect_answer_3 => params[:incorrect_answer_3],
+        :topic => params[:topic],
+        :chapter_id => params[:chapter_id],
+        :user_id => current_user.id
+      )
+    else
+      @question = Question.find_by_id(params[:question_id])
+      @question.question = params[:question]
+      @question.correct_answer = params[:correct_answer]
+      @question.incorrect_answer_1 = params[:incorrect_answer_1]
+      @question.incorrect_answer_2 = params[:incorrect_answer_2]
+      @question.incorrect_answer_3 = params[:incorrect_answer_3]
+      @question.topic = params[:topic]
+      @question.chapter_id = params[:chapter_id]
+      @question.user_id = current_user.id if @question.user_id.nil?
+      @question.save
+    end
+    render :json => @question.id
   end
   
   def compare_question
