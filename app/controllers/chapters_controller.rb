@@ -117,7 +117,7 @@ class ChaptersController < ApplicationController
     end
 
     # send it to the browsah
-    filename = @chapter.name.gsub(" ", "-")
+    filename = "Chapter-#{@chapter.number}"
     send_data csv_string_test,
               :type => 'text/csv; charset=iso-8859-1; header=present',
               :disposition => "attachment; filename=#{filename}.csv"
