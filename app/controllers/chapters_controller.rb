@@ -1,3 +1,5 @@
+require 'csv'
+
 class ChaptersController < ApplicationController
   # GET /chapters
   # GET /chapters.xml
@@ -87,5 +89,46 @@ class ChaptersController < ApplicationController
       format.html { redirect_to(chapters_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def export_to_csv
+    puts "STARTED"
+    @chapter = Chapter.find_by_id(params[:id])
+    return if @chapter.nil?
+    puts "DIDNT RETURN!!"
+    @questions = Question.where("chapter_id = ?", @chapter.id)
+
+    csv_string_test = CSV.generate do |csv|
+      csv << ["id", "question", "correct answer", "incorrect answer1", "incorrect answer2", "incorrect answer3", "topic"]
+
+     @questions.each do |q|
+        next if q.question.nil? || q.question.length < 1
+
+        row = [ q.id, 
+                clean_markup_from_desc(q.question), 
+                clean_markup_from_desc(q.correct_answer), 
+                clean_markup_from_desc(q.incorrect_answer_1),
+                clean_markup_from_desc(q.incorrect_answer_2),
+                clean_markup_from_desc(q.incorrect_answer_3),
+                clean_markup_from_desc(q.topic)]
+        csv << row
+      end
+    end
+
+    # send it to the browsah
+    filename = @chapter.name.gsub(" ", "-")
+    send_data csv_string_test,
+              :type => 'text/csv; charset=iso-8859-1; header=present',
+              :disposition => "attachment; filename=#{filename}.csv"
+  end
+
+  private
+
+  def clean_markup_from_desc(str)
+    return str if str.nil?
+    str.gsub!("\s{2,}", " ")
+    str.gsub!(" .", ".")
+    str.gsub!("\n","")
+    return str
   end
 end

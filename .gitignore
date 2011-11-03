@@ -4,3 +4,4 @@ log/*.log
 tmp/**/*
 nbproject/*
 .gitignore
+config/initializers/omniauth.rb

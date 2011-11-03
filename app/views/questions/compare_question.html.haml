@@ -1,0 +1,23 @@
+.compare_container
+    %h1 Which of these two questions is more beneficial to you as a student?
+    %a.qBlock{:href => "questions/update_question_scores/#{@question1.id}/#{@question2.id}/0"}
+        .question#q1
+            %strong= @question1.question
+
+            %ul
+                %li.mc_selection= @question1.correct_answer
+                %li.mc_selection= @question1.incorrect_answer_1
+                %li.mc_selection= @question1.incorrect_answer_2
+                %li.mc_selection= @question1.incorrect_answer_3
+
+    %a.qBlock{:href => "questions/update_question_scores/#{@question2.id}/#{@question1.id}/0"}
+        .question#q2
+            %strong= @question2.question
+
+            %ul
+                %li.mc_selection= @question2.correct_answer
+                %li.mc_selection= @question2.incorrect_answer_1
+                %li.mc_selection= @question2.incorrect_answer_2
+                %li.mc_selection= @question2.incorrect_answer_3
+    .tie
+        = link_to "It's a tie", "questions/update_question_scores/#{@question1.id}/#{@question2.id}/1"

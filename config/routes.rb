@@ -7,6 +7,7 @@ Questionbase::Application.routes.draw do
   match "auth/facebook/callback" => "sessions#create"
   match "signout" => "sessions#destroy", :as => :signout
   
+  match "chapters/:id/export" => "chapters#export_to_csv"
   match "compare_question" => "questions#compare_question"
   match "questions/update_question_scores/:winner_id/:loser_id/:tie" => "questions#update_question_scores"
 
