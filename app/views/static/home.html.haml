@@ -1,0 +1,10 @@
+-if current_user
+    = "Welcome " + current_user.name + "!"
+    =link_to "Sign out", signout_path 
+-else
+    .welcome
+        %center
+            Welcome to Questionbase. Please log in with Facebook to get started!
+            %br
+            %br
+            =link_to "Facebook Sign In", "auth/facebook"

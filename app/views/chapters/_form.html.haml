@@ -1,0 +1,9 @@
+= form_for @chapter do |f|
+    .field
+        %td= f.label :number, "Chapter number"
+        %td= f.number_field :number
+    
+    =hidden_field_tag("book_id", @current_book.id)
+
+    .actions
+        %td= f.submit

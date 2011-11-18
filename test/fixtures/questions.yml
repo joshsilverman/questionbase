@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  question: MyString
+  topic: MyString
+  correct_answer: MyString
+  incorrect_answer1: MyString
+  incorrect_answer2: MyString
+  incorrect_answer3: MyString
+  user_id: 1
+  chapter_id: 1
+  score: 1
+
+two:
+  question: MyString
+  topic: MyString
+  correct_answer: MyString
+  incorrect_answer1: MyString
+  incorrect_answer2: MyString
+  incorrect_answer3: MyString
+  user_id: 1
+  chapter_id: 1
+  score: 1
